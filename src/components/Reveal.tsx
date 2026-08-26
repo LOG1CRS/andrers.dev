@@ -45,6 +45,9 @@ type RevealProps = {
   delay?: number;
   /** the softer, blurred variant used for the hero headline */
   soft?: boolean;
+  /** run the entrance off a CSS animation instead of the observer, so the
+      content is painted without waiting for hydration. For above the fold. */
+  css?: boolean;
   tag?: "div" | "span" | "p";
   className?: string;
 };
@@ -53,9 +56,40 @@ export function Reveal({
   children,
   delay = 0,
   soft = false,
+  css = false,
   tag = "div",
   className = "",
 }: RevealProps) {
+  const Tag = tag as "div";
+  const style = delay ? ({ "--rd": `${delay}s` } as React.CSSProperties) : undefined;
+
+  if (css) {
+    return (
+      <Tag
+        className={["reveal-css", soft ? "soft" : "", className].filter(Boolean).join(" ")}
+        style={style}
+      >
+        {children}
+      </Tag>
+    );
+  }
+
+  return <Observed {...{ soft, tag, className, style }}>{children}</Observed>;
+}
+
+function Observed({
+  children,
+  soft,
+  tag,
+  className,
+  style,
+}: {
+  children: ReactNode;
+  soft: boolean;
+  tag: "div" | "span" | "p";
+  className: string;
+  style?: React.CSSProperties;
+}) {
   const { ref, inView } = useInView<HTMLElement>();
   const Tag = tag as "div";
   return (
@@ -64,7 +98,7 @@ export function Reveal({
       className={["reveal", soft ? "soft" : "", inView ? "is-in" : "", className]
         .filter(Boolean)
         .join(" ")}
-      style={delay ? ({ "--rd": `${delay}s` } as React.CSSProperties) : undefined}
+      style={style}
     >
       {children}
     </Tag>

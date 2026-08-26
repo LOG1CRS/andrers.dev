@@ -142,7 +142,6 @@ p {
   position: absolute;
   border-radius: 50%;
   mix-blend-mode: screen;
-  will-change: transform, opacity;
 }
 
 .bm1 {
@@ -334,7 +333,39 @@ p {
     opacity 0.95s var(--ease),
     transform 0.95s var(--ease);
   transition-delay: var(--rd, 0s);
-  will-change: opacity, transform;
+}
+
+/* The hero cannot wait for hydration to become visible, so it runs the same
+   entrance off a plain CSS animation instead of the observer. */
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 34px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes reveal-in-soft {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 42px, 0);
+    filter: blur(11px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+.reveal-css {
+  animation: reveal-in 0.95s var(--ease) both;
+  animation-delay: var(--rd, 0s);
+}
+.reveal-css.soft {
+  animation-name: reveal-in-soft;
+  animation-duration: 1.2s;
 }
 .reveal.soft {
   filter: blur(11px);
@@ -1389,6 +1420,28 @@ p {
   }
   .brand {
     font-size: 18px;
+  }
+
+  /* A phone cannot afford the full light field: 12 MP of animated 100px+ blur
+     starves the compositor and hydration never gets a frame. The beams are
+     radial gradients, already soft, so a much smaller blur reads the same. */
+  .beam {
+    animation: none;
+    filter: blur(45px);
+  }
+  .bm2,
+  .bm4,
+  .bm5 {
+    display: none;
+  }
+  .grain {
+    display: none;
+  }
+  .amb {
+    filter: blur(40px);
+  }
+  .reveal-css.soft {
+    animation-name: reveal-in;
   }
 
   .hero {

@@ -15,17 +15,17 @@ export function Hero() {
           <div className="hero-col">
             <h1 className="h1">
               {hero.lines.map((line, i) => (
-                <Reveal key={line.accent + i} tag="span" soft delay={0.08 * (i + 1)} className="ln">
+                <Reveal key={line.accent + i} tag="span" soft css delay={0.08 * (i + 1)} className="ln">
                   <span className="w">{line.muted}</span> <span className="a">{line.accent}</span>
                 </Reveal>
               ))}
             </h1>
 
-            <Reveal delay={0.44}>
+            <Reveal css delay={0.44}>
               <p className="sub">{hero.sub}</p>
             </Reveal>
 
-            <Reveal delay={0.56}>
+            <Reveal css delay={0.56}>
               <div className="hero-actions">
                 <a href={hero.primary.href} className="btn btn-p">
                   {hero.primary.label}
