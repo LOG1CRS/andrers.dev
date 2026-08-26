@@ -543,7 +543,8 @@ p {
 .hero {
   position: relative;
   padding: 150px 0 130px;
-  min-height: 780px;
+  min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   align-items: center;
 }
@@ -757,6 +758,12 @@ p {
   font-weight: 600;
   max-width: 900px;
   text-wrap: balance;
+}
+.sec-edu {
+  padding-bottom: 64px;
+}
+.sec-lang {
+  padding-top: 0;
 }
 .sec-note {
   margin-top: 20px;
@@ -1197,10 +1204,13 @@ p {
   text-shadow: 0 0 52px rgba(var(--gold-rgb), 0.32);
 }
 .c-sub {
-  margin: 24px auto 0;
-  font-size: 19px;
-  line-height: 1.6;
-  color: var(--text);
+  margin: 0 auto 34px;
+  font-size: 23px;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+  color: var(--gold);
+  text-shadow: 0 0 52px rgba(var(--gold-rgb), 0.32);
   max-width: 520px;
 }
 .c-cta {
@@ -1383,7 +1393,6 @@ p {
 
   .hero {
     padding: 124px 0 90px;
-    min-height: 560px;
   }
   .h1 {
     font-size: clamp(28px, 9.8vw, 56px);
@@ -1391,11 +1400,11 @@ p {
     line-height: 1.06;
   }
   .sub {
-    margin-top: 26px;
+    margin-top: 40px;
     font-size: 15.5px;
   }
   .hero-actions {
-    margin-top: 32px;
+    margin-top: 48px;
     flex-direction: column;
     align-items: stretch;
     gap: 10px;
@@ -1426,6 +1435,12 @@ p {
 
   .sec {
     padding: 76px 0;
+  }
+  .sec-edu {
+    padding-bottom: 36px;
+  }
+  .sec-lang {
+    padding-top: 0;
   }
   .sec-k {
     font-size: 12px;
@@ -1637,14 +1652,13 @@ p {
     height: 700px;
   }
   .c-lead {
-    margin-top: 24px;
     font-size: clamp(26px, 8.2vw, 46px);
     line-height: 1.14;
     letter-spacing: -0.044em;
   }
   .c-sub {
-    margin-top: 16px;
-    font-size: 16.5px;
+    margin-bottom: 24px;
+    font-size: 19px;
   }
   .c-cta {
     display: flex;

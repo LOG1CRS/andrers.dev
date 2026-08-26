@@ -10,14 +10,14 @@ export function Contact() {
 
       <div className="wrap">
         <Reveal delay={0.08}>
+          <p className="c-sub">{contact.sub}</p>
+        </Reveal>
+
+        <Reveal delay={0.16}>
           <h2 className="c-lead">
             {contact.leadStart}
             <em>{contact.leadAccent}</em>
           </h2>
-        </Reveal>
-
-        <Reveal delay={0.16}>
-          <p className="c-sub">{contact.sub}</p>
         </Reveal>
 
         <Reveal delay={0.24}>
@@ -35,7 +35,7 @@ export function Contact() {
               {person.linkedin.label}
               <ArrowUpRight />
             </a>
-            <a href={person.resume.href}>
+            <a href={person.resume.href} target="_blank" rel="noreferrer noopener">
               {person.resume.label}
               <Download />
             </a>

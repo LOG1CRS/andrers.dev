@@ -4,7 +4,7 @@ import { education, languages } from "@/lib/content";
 
 export function Education() {
   return (
-    <Section id="education">
+    <Section id="education" className="sec-edu">
       <div
         className="amb"
         style={{
@@ -53,19 +53,13 @@ export function Education() {
 /** Its own section, sitting between Education and Certifications. Not in the nav. */
 export function Languages() {
   return (
-    <Section id="languages">
+    <Section id="languages" className="sec-lang">
       <div className="grain" />
       <div className="wrap">
         <span className="sec-k">{languages.eyebrow}</span>
-        <Reveal delay={0.08}>
-          <h2 className="sec-title">{languages.title}</h2>
-        </Reveal>
-        <Reveal delay={0.16}>
-          <p className="sec-note">{languages.note}</p>
-        </Reveal>
 
-        <Reveal delay={0.16}>
-          <div className="tbl" style={{ marginTop: 68, maxWidth: 860 }}>
+        <Reveal delay={0.08}>
+          <div className="tbl" style={{ marginTop: 44, maxWidth: 860 }}>
             {languages.items.map((l) => (
               <div className="trow t-lang" key={l.key}>
                 <div className="t-k">{l.key}</div>

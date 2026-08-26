@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://andrers.dev"),
   title: {
     default: person.name,
-    template: `${person.name} — %s`,
+    template: `${person.name} · %s`,
   },
   description,
   keywords: [
@@ -33,13 +33,13 @@ export const metadata: Metadata = {
     type: "website",
     url: "https://andrers.dev",
     siteName: person.name,
-    title: `${person.name} — Product, software and data`,
+    title: `${person.name} · Product, software and data`,
     description,
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: `${person.name} — Product, software and data`,
+    title: `${person.name} · Product, software and data`,
     description,
   },
   alternates: { canonical: "/" },

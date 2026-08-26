@@ -46,7 +46,7 @@ export function Nav() {
 
   useEffect(() => {
     const label = titledSections.find((s) => s.id === active)?.label;
-    document.title = label ? `${person.name} — ${label}` : person.name;
+    document.title = label ? `${person.name} · ${label}` : person.name;
   }, [active]);
 
   /* the sheet owns the viewport while it is open */

@@ -11,7 +11,7 @@ export const person = {
     label: "LinkedIn /in/andre-marco-rs",
     href: "https://www.linkedin.com/in/andre-marco-rs",
   },
-  resume: { label: "Resume — PDF", href: "/andre-ruiz-cv.pdf" },
+  resume: { label: "Resume · PDF", href: "/andre-ruiz-cv.pdf" },
   location: "Guadalajara, Mexico",
 };
 
@@ -105,7 +105,7 @@ export const about = {
 export const principles = {
   eyebrow: "Principles",
   title: "How I work.",
-  note: "Three ideas run through everything I build — and they run in this order.",
+  note: "Three principles for turning complex problems into useful, meaningful outcomes.",
   items: [
     {
       index: "01",
@@ -137,10 +137,10 @@ export const principles = {
 export const experience = {
   eyebrow: "Experience",
   title: "Six years, four industries, one direction.",
-  note: "Four roles, each one moving further from writing the code and closer to deciding what gets built.",
+  note: "A progression from building software to shaping products, platforms, and technical direction.",
   roles: [
     {
-      date: "2023 — Present",
+      date: "2023 – Present",
       company: "PiSA Farmacéutica",
       title: "Senior Analytics Specialist",
       description:
@@ -153,7 +153,7 @@ export const experience = {
       ],
     },
     {
-      date: "2022 — 2023",
+      date: "2022 – 2023",
       company: "Genpact",
       title: "Senior Web Developer",
       description:
@@ -163,7 +163,7 @@ export const experience = {
       ],
     },
     {
-      date: "2021 — 2022",
+      date: "2021 – 2022",
       company: "Genpact",
       title: "Web Developer",
       description:
@@ -171,7 +171,7 @@ export const experience = {
       bullets: [],
     },
     {
-      date: "2020 — 2021",
+      date: "2020 – 2021",
       company: "Freelance",
       title: "Web Developer",
       description:
@@ -183,9 +183,9 @@ export const experience = {
 
 export const education = {
   eyebrow: "Education",
-  title: "How I learned to think about systems.",
-  note: "An engineering programme built around reasoning about systems, not only implementing them.",
-  years: "2017 — 2020",
+  title: "Where the Foundation Began.",
+  note: "The academic foundation behind the way I understand, design, and build technology.",
+  years: "2017 – 2020",
   university: ["Universidad", "Panamericana,", "Guadalajara"],
   degree: "B.S. Computer Graphics and Systems Engineering",
   quote:
@@ -194,8 +194,6 @@ export const education = {
 
 export const languages = {
   eyebrow: "Languages",
-  title: "Working in two languages.",
-  note: "Comfortable working, writing and presenting in both.",
   items: [
     { key: "Spanish", value: "Native" },
     { key: "English", value: "Professional working proficiency" },
@@ -205,7 +203,7 @@ export const languages = {
 export const certifications = {
   eyebrow: "Certifications",
   title: "Formal training.",
-  note: "Four programmes in process improvement, agile delivery and structured problem-solving.",
+  note: "Recognized credentials that support the skills, methods, and disciplines behind my work.",
   items: [
     { year: "2024", name: "Analysis & Problem-Solving", issuer: "4PAR" },
     { year: "2023", name: "Agile Intermediate", issuer: "Genpact" },
@@ -216,8 +214,8 @@ export const certifications = {
 
 export const skills = {
   eyebrow: "Skills",
-  title: "What I actually do.",
-  note: "Six capabilities that overlap more than they separate.",
+  title: "What I Bring.",
+  note: "The disciplines that let me move between business needs, product decisions, and technical execution.",
   items: [
     {
       index: "01",
@@ -328,7 +326,7 @@ export const contact = {
 };
 
 export const footer = {
-  left: "© 2026 · Andrers.dev",
-  right: "Guadalajara · MX",
+  left: "ANDRERS.DEV",
+  right: "© 2026 · all rights reserved",
   rightShort: "GDL · MX",
 };
