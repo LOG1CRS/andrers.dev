@@ -440,6 +440,11 @@ p {
 }
 
 .brand {
+  display: inline-flex;
+  align-items: center;
+  height: 44px;
+  padding: 0 14px;
+  margin: 0 -14px;
   font-size: 19px;
   font-weight: 600;
   letter-spacing: -0.022em;
@@ -758,6 +763,7 @@ p {
 .sec {
   position: relative;
   padding: 136px 0;
+  scroll-margin-top: -96px;
 }
 .sec-k {
   display: inline-block;
@@ -1529,6 +1535,7 @@ p {
 
   .sec {
     padding: 76px 0;
+    scroll-margin-top: -56px;
   }
   .sec-edu {
     padding-bottom: 36px;
