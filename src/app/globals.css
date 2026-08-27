@@ -519,18 +519,12 @@ p {
   background: var(--white);
   transition:
     transform 0.4s var(--ease),
-    width 0.4s var(--ease),
     opacity 0.3s ease;
-}
-.menu-btn i:last-child {
-  width: 12px;
-  background: var(--gold);
 }
 .menu-btn[aria-expanded="true"] i:first-child {
   transform: translateY(4px) rotate(45deg);
 }
 .menu-btn[aria-expanded="true"] i:last-child {
-  width: 19px;
   transform: translateY(-4px) rotate(-45deg);
 }
 
