@@ -14,11 +14,21 @@ export function Hero() {
         <div className="hero-in">
           <div className="hero-col">
             <h1 className="h1">
-              {hero.lines.map((line, i) => (
-                <Reveal key={line.accent + i} tag="span" soft css delay={0.08 * (i + 1)} className="ln">
-                  <span className="w">{line.muted}</span> <span className="a">{line.accent}</span>
-                </Reveal>
-              ))}
+              {hero.lines.map((line, i) => {
+                /* the accent colour belongs to the word, not to the punctuation
+                   trailing it */
+                const punct = line.accent.match(/[.,]+$/)?.[0] ?? "";
+                const word = punct ? line.accent.slice(0, -punct.length) : line.accent;
+                return (
+                  <Reveal key={line.accent + i} tag="span" soft css delay={0.08 * (i + 1)} className="ln">
+                    <span className="w">{line.muted}</span>{" "}
+                    <span className="a">
+                      {word}
+                      {punct && <span className="pn">{punct}</span>}
+                    </span>
+                  </Reveal>
+                );
+              })}
             </h1>
 
             <Reveal css delay={0.44}>

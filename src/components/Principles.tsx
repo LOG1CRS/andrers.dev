@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { Reveal, Section } from "./Reveal";
 import { principles } from "@/lib/content";
 
@@ -37,7 +38,14 @@ export function Principles() {
             </div>
             <div className="prin-n">{item.name}</div>
             <h3 className="prin-s">{item.statement}</h3>
-            <p className="prin-p">{item.body}</p>
+            <p className="prin-p">
+              {item.body.map((line, n) => (
+                <Fragment key={line.slice(0, 32)}>
+                  {n > 0 && <br />}
+                  {line}
+                </Fragment>
+              ))}
+            </p>
           </Reveal>
         ))}
       </div>

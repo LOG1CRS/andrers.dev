@@ -20,7 +20,6 @@
   --white: #ffffff;
   --ivory: #f2eee4;
   --text: #b7c2ca;   /* body        ~10.5:1 */
-  --text-2: #8b9ba7; /* secondary   ~7.1:1  */
   --text-3: #6b7c89; /* micro       ~4.7:1  */
 
   --line: rgba(139, 155, 167, 0.13);
@@ -48,7 +47,7 @@ html {
 body {
   margin: 0;
   background: var(--ink);
-  color: var(--text-2);
+  color: var(--text);
   font-family: var(--sans);
   font-weight: 400;
   font-optical-sizing: auto;
@@ -142,6 +141,10 @@ p {
   position: absolute;
   border-radius: 50%;
   mix-blend-mode: screen;
+}
+/* off screen there is nothing to animate — the loops are 100px+ blurs */
+.beams.is-out .beam {
+  animation-play-state: paused;
 }
 
 .bm1 {
@@ -367,14 +370,6 @@ p {
   animation-name: reveal-in-soft;
   animation-duration: 1.2s;
 }
-.reveal.soft {
-  filter: blur(11px);
-  transform: translate3d(0, 42px, 0);
-  transition:
-    opacity 1.2s var(--ease),
-    transform 1.2s var(--ease),
-    filter 1.2s var(--ease);
-}
 .reveal.is-in {
   opacity: 1;
   transform: none;
@@ -464,7 +459,7 @@ p {
   border-radius: 999px;
   font-size: 13px;
   font-weight: 450;
-  color: var(--text-2);
+  color: var(--text);
   transition:
     color 0.3s ease,
     background 0.3s ease;
@@ -546,12 +541,17 @@ p {
   justify-content: flex-start;
   padding: 96px 22px 40px;
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
-  transition: opacity 0.4s ease;
+  transition:
+    opacity 0.4s ease,
+    visibility 0s linear 0.4s;
 }
 .sheet.is-open {
   opacity: 1;
+  visibility: visible;
   pointer-events: auto;
+  transition: opacity 0.4s ease;
 }
 .sheet a {
   display: block;
@@ -606,6 +606,10 @@ p {
 .h1 .a {
   color: var(--gold);
   text-shadow: 0 0 52px rgba(var(--gold-rgb), 0.34);
+}
+.h1 .a .pn {
+  color: var(--white);
+  text-shadow: none;
 }
 .sub {
   margin-top: 38px;
@@ -790,6 +794,19 @@ p {
   max-width: 900px;
   text-wrap: balance;
 }
+/* these sections run their heading and note across the whole shell */
+#principles .sec-title,
+#principles .sec-note,
+#experience .sec-title,
+#experience .sec-note,
+#education .sec-title,
+#education .sec-note,
+#certifications .sec-title,
+#certifications .sec-note,
+#skills .sec-title,
+#skills .sec-note {
+  max-width: none;
+}
 .sec-edu {
   padding-bottom: 64px;
 }
@@ -801,7 +818,7 @@ p {
   max-width: 560px;
   font-size: 16px;
   line-height: 1.72;
-  color: var(--text-2);
+  color: var(--text);
   text-wrap: pretty;
 }
 
@@ -809,16 +826,6 @@ p {
    About
    ============================================================ */
 
-.about-lead {
-  margin-top: 56px;
-  max-width: 880px;
-  font-size: clamp(20px, 2vw, 27px);
-  line-height: 1.46;
-  letter-spacing: -0.024em;
-  color: var(--ivory);
-  font-weight: 450;
-  text-wrap: pretty;
-}
 .about-body {
   margin-top: 38px;
   max-width: 760px;
@@ -826,7 +833,7 @@ p {
 .about-body p {
   font-size: 16.5px;
   line-height: 1.84;
-  color: var(--text-2);
+  color: var(--text);
   text-wrap: pretty;
 }
 .about-body p + p {
@@ -860,12 +867,22 @@ p {
 
 .prin {
   position: relative;
-  padding: 88px 0;
-  max-width: 880px;
+  padding: 136px 0;
+  display: grid;
+  /* text side 60%, empty side 40% — mirrored for the right-aligned ones */
+  grid-template-columns: 60fr 40fr;
+  gap: 0 64px;
 }
 .prin.right {
-  margin-left: auto;
+  grid-template-columns: 40fr 60fr;
   text-align: right;
+}
+/* every child stacks inside the 60% half — the 40% half stays empty */
+.prin > * {
+  grid-column: 1;
+}
+.prin.right > * {
+  grid-column: 2;
 }
 .prin-i {
   font-size: clamp(72px, 8vw, 118px);
@@ -896,12 +913,8 @@ p {
   margin-top: 26px;
   font-size: 16.5px;
   line-height: 1.84;
-  color: var(--text-2);
-  max-width: 640px;
+  color: var(--text);
   text-wrap: pretty;
-}
-.prin.right .prin-p {
-  margin-left: auto;
 }
 
 /* ============================================================
@@ -969,7 +982,7 @@ p {
   margin-top: 16px;
   font-size: 17px;
   font-weight: 600;
-  color: var(--text);
+  color: var(--white);
   letter-spacing: -0.02em;
   line-height: 1.4;
 }
@@ -984,7 +997,7 @@ p {
   margin-top: 18px;
   font-size: 15.5px;
   line-height: 1.8;
-  color: var(--text-2);
+  color: var(--text);
   max-width: 760px;
   text-wrap: pretty;
 }
@@ -1041,7 +1054,7 @@ p {
   font-size: 13.5px;
   font-weight: 600;
   line-height: 1.75;
-  color: var(--text);
+  color: var(--white);
   letter-spacing: 0.03em;
 }
 .deg {
@@ -1058,7 +1071,7 @@ p {
   border-left: 1px solid rgba(var(--gold-rgb), 0.32);
   font-size: 17px;
   line-height: 1.72;
-  color: var(--text-2);
+  color: var(--text);
   max-width: 760px;
   text-wrap: pretty;
 }
@@ -1163,7 +1176,7 @@ p {
   font-size: 19px;
   line-height: 1.52;
   letter-spacing: -0.022em;
-  color: var(--ivory);
+  color: var(--white);
   font-weight: 450;
   max-width: 640px;
   text-wrap: pretty;
@@ -1172,7 +1185,7 @@ p {
   margin-top: 16px;
   font-size: 15px;
   line-height: 1.8;
-  color: var(--text-2);
+  color: var(--text);
   max-width: 660px;
   text-wrap: pretty;
 }
@@ -1183,12 +1196,40 @@ p {
   gap: 8px;
 }
 .tag {
+  position: relative;
   font-size: 11.5px;
   font-weight: 500;
-  color: var(--text-2);
-  border: 1px solid var(--line-2);
+  color: var(--ivory);
   border-radius: 999px;
   padding: 8px 13px;
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    0 6px 18px -12px rgba(0, 0, 0, 0.9);
+}
+/* the iOS-style rim: a bright hairline that fades around the pill */
+.tag::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    150deg,
+    rgba(255, 255, 255, 0.55),
+    rgba(255, 255, 255, 0.14) 42%,
+    rgba(255, 255, 255, 0.06) 62%,
+    rgba(255, 255, 255, 0.34)
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
 }
 
 /* ============================================================
@@ -1231,11 +1272,11 @@ p {
 }
 .c-lead em {
   font-style: normal;
-  color: var(--gold);
-  text-shadow: 0 0 52px rgba(var(--gold-rgb), 0.32);
+  color: var(--white);
+  text-shadow: 0 0 52px rgba(255, 255, 255, 0.24);
 }
 .c-sub {
-  margin: 0 auto 34px;
+  margin: 0 auto 56px;
   font-size: 23px;
   line-height: 1.5;
   letter-spacing: -0.02em;
@@ -1249,7 +1290,7 @@ p {
   align-items: center;
   max-width: 100%;
   gap: 22px;
-  margin-top: 56px;
+  margin-top: 84px;
   height: 82px;
   padding: 0 12px 0 40px;
   border-radius: 999px;
@@ -1292,7 +1333,7 @@ p {
   align-items: center;
   justify-content: center;
   gap: 14px;
-  margin-top: 24px;
+  margin-top: 40px;
   flex-wrap: wrap;
 }
 .c-alt a {
@@ -1509,10 +1550,6 @@ p {
     font-size: 15px;
   }
 
-  .about-lead {
-    margin-top: 32px;
-    line-height: 1.5;
-  }
   .about-body {
     margin-top: 26px;
   }
@@ -1529,11 +1566,17 @@ p {
   }
 
   .prin {
-    padding: 44px 0;
-    max-width: none;
+    padding: 76px 0;
+    grid-template-columns: 1fr;
+    gap: 0;
   }
   .prin.right {
+    grid-template-columns: 1fr;
     text-align: right;
+  }
+  .prin > *,
+  .prin.right > * {
+    grid-column: 1;
   }
   .prin-n {
     margin-top: -10px;
@@ -1547,7 +1590,6 @@ p {
   .prin-p {
     margin-top: 18px;
     font-size: 15px;
-    max-width: none;
   }
 
   .roles {
@@ -1710,14 +1752,14 @@ p {
     letter-spacing: -0.044em;
   }
   .c-sub {
-    margin-bottom: 24px;
+    margin-bottom: 38px;
     font-size: 19px;
   }
   .c-cta {
     display: flex;
     justify-content: space-between;
     gap: 12px;
-    margin-top: 34px;
+    margin-top: 50px;
     height: 68px;
     padding: 0 10px 0 20px;
     font-size: clamp(15px, 4.6vw, 21px);
@@ -1728,10 +1770,6 @@ p {
     height: 48px;
   }
   .c-cta .disc svg {
-    width: 19px;
-    height: 19px;
-  }
-  .c-cta .disc svg {
     width: 21px;
     height: 21px;
   }
@@ -1739,7 +1777,7 @@ p {
     display: grid;
     grid-template-columns: 1fr;
     gap: 10px;
-    margin-top: 18px;
+    margin-top: 30px;
   }
   .c-alt a {
     justify-content: center;

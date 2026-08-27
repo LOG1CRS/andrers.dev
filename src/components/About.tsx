@@ -25,10 +25,6 @@ export function About() {
         </Reveal>
 
         <Reveal delay={0.16}>
-          <p className="about-lead">{about.lead}</p>
-        </Reveal>
-
-        <Reveal delay={0.24}>
           <div className="about-body">
             {about.body.map((p) => (
               <p key={p.slice(0, 32)}>{p}</p>

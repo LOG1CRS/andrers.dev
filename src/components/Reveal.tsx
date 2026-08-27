@@ -2,6 +2,31 @@
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
+/* Every caller wants the same thresholds, so they all share one observer
+   rather than standing up ~50 of them. */
+const waiting = new Map<Element, () => void>();
+let observer: IntersectionObserver | null = null;
+
+function watch(el: Element, onEnter: () => void) {
+  observer ??= new IntersectionObserver(
+    (entries) => {
+      for (const e of entries) {
+        if (!e.isIntersecting) continue;
+        observer!.unobserve(e.target);
+        waiting.get(e.target)?.();
+        waiting.delete(e.target);
+      }
+    },
+    { rootMargin: "0px 0px -10% 0px", threshold: 0.08 },
+  );
+  waiting.set(el, onEnter);
+  observer.observe(el);
+  return () => {
+    observer?.unobserve(el);
+    waiting.delete(el);
+  };
+}
+
 /** Fires once, when the element first comes into view. */
 export function useInView<T extends HTMLElement>() {
   const ref = useRef<T>(null);
@@ -23,17 +48,7 @@ export function useInView<T extends HTMLElement>() {
       setInView(true);
       return;
     }
-    const io = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          setInView(true);
-          io.disconnect();
-        }
-      },
-      { rootMargin: "0px 0px -10% 0px", threshold: 0.08 },
-    );
-    io.observe(el);
-    return () => io.disconnect();
+    return watch(el, () => setInView(true));
   }, []);
 
   return { ref, inView };
@@ -43,7 +58,7 @@ type RevealProps = {
   children: ReactNode;
   /** seconds */
   delay?: number;
-  /** the softer, blurred variant used for the hero headline */
+  /** the softer, blurred variant used for the hero headline — CSS path only */
   soft?: boolean;
   /** run the entrance off a CSS animation instead of the observer, so the
       content is painted without waiting for hydration. For above the fold. */
@@ -74,18 +89,16 @@ export function Reveal({
     );
   }
 
-  return <Observed {...{ soft, tag, className, style }}>{children}</Observed>;
+  return <Observed {...{ tag, className, style }}>{children}</Observed>;
 }
 
 function Observed({
   children,
-  soft,
   tag,
   className,
   style,
 }: {
   children: ReactNode;
-  soft: boolean;
   tag: "div" | "span" | "p";
   className: string;
   style?: React.CSSProperties;
@@ -95,9 +108,7 @@ function Observed({
   return (
     <Tag
       ref={ref as React.Ref<HTMLDivElement>}
-      className={["reveal", soft ? "soft" : "", inView ? "is-in" : "", className]
-        .filter(Boolean)
-        .join(" ")}
+      className={["reveal", inView ? "is-in" : "", className].filter(Boolean).join(" ")}
       style={style}
     >
       {children}
